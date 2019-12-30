@@ -58,6 +58,14 @@
    (let [M (concat [A B] more)]
      (reduce matrix-add M))))
 
+(defn matrix-trace
+  "Compute the trace of a matrix"
+  [A]
+  (loop [i 0 result 0]
+    (if (>= i (count A))
+      result
+      (recur (inc i) (+ result (cl/get A i i))))))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
