@@ -19,6 +19,30 @@
                      (if (= i j) 1 n))]
     (cl/map-indexed identity-f init)))
 
+(defn rand-square-clmatrix
+  "Generates a random clatrix matrix of size n x n"
+  [n]
+  (cl/map rand-int (square-matrix n 100 :implementation :clatrix)))
+
+(defn rand-square-matrix
+  "Generates a random matrix of size n x n"
+  [n]
+  (matrix
+    (repeatedly n #(map rand-int (repeat n 100)))))
+
+(defn id-computed-matrix
+  "Creates an identity matrix of size n x n
+  using compute-matrix"
+  [n]
+  (compute-matrix [n n] #(if (= %1 %2) 1 0)))
+
+(defn rand-computed-matrix
+  "Creates an n x m matrix of random elements
+  using compute-matrix"
+  [n m]
+  (compute-matrix [n m]
+                  (fn [i j] (rand-int 100))))
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
